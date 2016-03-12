@@ -1,5 +1,5 @@
 full:
-    folder:
+    article:
         template: "content/full/folder.html.twig"
         match:
-            Identifier\ContentType: ["article"]
+            Identifier\ContentType: ["folder"]

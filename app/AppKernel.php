@@ -8,6 +8,9 @@
  */
 use eZ\Bundle\EzPublishCoreBundle\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\Config\Loader\LoaderResolver;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpKernel\Config\FileLocator;
 
 class AppKernel extends Kernel
 {
@@ -45,6 +48,7 @@ class AppKernel extends Kernel
             new EzSystems\PlatformInstallerBundle\EzSystemsPlatformInstallerBundle(),
             new EzSystems\RepositoryFormsBundle\EzSystemsRepositoryFormsBundle(),
             new EzSystems\EzPlatformSolrSearchEngineBundle\EzSystemsEzPlatformSolrSearchEngineBundle(),
+            new EzSystems\EzSupportToolsBundle\EzSystemsEzSupportToolsBundle(),
             new AppBundle\AppBundle(),
         );
 
@@ -66,6 +70,24 @@ class AppKernel extends Kernel
         return $bundles;
     }
 
+    protected function getContainerLoader(ContainerInterface $container)
+    {
+        $containerLoader = parent::getContainerLoader($container);
+
+        /** @var \Symfony\Component\Config\Loader\LoaderResolver $resolver */
+        $resolver = $containerLoader->getResolver();
+        $loaders = [
+            new ConfigTreeLoader(
+                $container,
+                new FileLocator($this)
+            )
+        ] + $resolver->getLoaders();
+
+        $containerLoader->setResolver(new LoaderResolver($loaders));
+
+        return $containerLoader;
+    }
+
     /**
      * Loads the container configuration.
      *
@@ -77,5 +99,14 @@ class AppKernel extends Kernel
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load($this->getRootDir() . '/config/config_' . $this->getEnvironment() . '.yml');
+
+        if (file_exists($path = $this->getRootDir() . '/config/ezplatform')) {
+            $finder = new \Symfony\Component\Finder\Finder();
+            foreach ($finder->name("*.yml")->in($path) as $file) {
+                $loader->load(
+                    $file->getPathName()
+                );
+            }
+        }
     }
 }

@@ -1,21 +1,4 @@
 ezpublish:
-    # Repositories configuration, setup default repository to support solr if enabled
-    repositories:
-        default:
-            storage: ~
-            search:
-                engine: %search_engine%
-                connection: default
-
-    # Siteaccess configuration, with one siteaccess per default
-    siteaccess:
-        list: [site]
-        groups:
-            site_group: [site]
-        default_siteaccess: site
-        match:
-            URIElement: 1
-
     # System settings, grouped by siteaccess and/or siteaccess group
     system:
         site_group:

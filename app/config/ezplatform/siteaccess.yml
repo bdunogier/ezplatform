@@ -1,0 +1,6 @@
+list: [site]
+groups:
+    site_group: [site]
+default_siteaccess: site
+match:
+    URIElement: 1

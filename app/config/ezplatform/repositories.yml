@@ -1,0 +1,7 @@
+default:
+    #fields_groups:
+    #    list: ['content', 'metadata', 'internal']
+    #    default: 'content'
+    search:
+        engine: %search_engine%
+        connection: default
