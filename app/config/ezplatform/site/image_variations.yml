@@ -1,0 +1,4 @@
+small:
+    reference: ~
+    filters:
+        - { name: geometry/scaledownonly, params: [100, 160] }
