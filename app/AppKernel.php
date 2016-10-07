@@ -49,7 +49,7 @@ class AppKernel extends Kernel
             new EzSystems\CommentsBundle\EzSystemsCommentsBundle(),
             new EzSystems\PlatformUISearchPrototypeBundle\EzSystemsPlatformUISearchPrototypeBundle(),
             new EzSystems\EzContentOnTheFlyBundle\EzSystemsEzContentOnTheFlyBundle(),
-            new Overblog\GraphQLBundle\OverblogGraphQLBundle()
+            new Overblog\GraphQLBundle\OverblogGraphQLBundle(),
             new BD\EzPlatformGraphQLBundle\BDEzPlatformGraphQLBundle(),
             new AppBundle\AppBundle(),
         );
