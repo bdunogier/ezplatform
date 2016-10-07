@@ -5,6 +5,14 @@ imports:
     - { resource: env/docker.php }
     - { resource: env/platformsh.php }
 
+overblog_graphql:
+    definitions:
+        internal_error_message: "An error occurred, please retry later or contact us!"
+        config_validation: %kernel.debug%
+        schema:
+            query: Query
+            mutation: ~
+
 # Configuration for Database connection, can have several connections used by eZ Repositories in ezplatform.yml
 doctrine:
     dbal:
