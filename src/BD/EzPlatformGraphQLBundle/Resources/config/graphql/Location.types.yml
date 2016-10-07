@@ -1,0 +1,39 @@
+Location:
+    type: object
+    config:
+        description: "An eZ Platform repository location."
+        fields:
+            id:
+                type: "Int!"
+                description: "The unique ID of the location."
+                resolve:
+            contentId:
+                type: "Int!"
+                description: "The ID of the Content item referenced by the Location."
+            contentInfo:
+                type: "ContentInfo"
+                description: "The referenced Content item's metadata."
+            priority:
+                type: "Int"
+                description: "Position of the Location among its siblings when sorted using priority/"
+            hidden:
+                type: "Boolean"
+                description: "Indicates that the Location is explicitly marked as hidden."
+            invisible:
+                type: "Boolean"
+                description: "Indicates that the Location is implicitly marked as hidden by a parent location"
+            remoteId:
+                type: "String"
+                description: "A global unique id of the content object"
+            parentLocationId:
+                type: "Int"
+                description: "The id of the parent location"
+            pathString:
+                type: "String"
+                description: "The path to the Location in the Tree."
+            #path:
+            #   type:
+            #   description: Same as $pathString but as array, e.g. [ 1, 2, 4, 23 ]
+            depth:
+                type: "Int"
+                description: "Depth location has in the location tree"

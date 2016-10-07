@@ -1,0 +1,49 @@
+ContentInfo:
+    type: object
+    config:
+        description: "An eZ Platform repository ContentInfo."
+        fields:
+            id:
+                type: "Int!"
+                description: "The Content item's unique ID."
+                resolve:
+            contentTypeId:
+                type: "Int!"
+                description: "The Content Type ID of the Content item."
+            contentType:
+                type: "ContentType!"
+                description: "The Content Type of the Content item."
+                resolve: "@=resolver('ContentTypeById', [value.contentTypeId])"
+            name:
+                type: "String"
+                description: "The computed name (via name schema) in the main language of the Content item."
+            sectionId:
+                type: "Int"
+                description: "The section to which the Content object is assigned."
+            currentVersionNo:
+                type: "Int"
+                description: "Version number of the published version, or 1 for a newly created draft."
+            published:
+                type: "Boolean"
+                description: "If the Content item has a published version."
+            ownerId:
+                type: "Int"
+                description: "The user id of the owner of the Content object"
+            modificationDate:
+                type: "String"
+                description: "Date the Content item was last modified on."
+            publishedDate:
+                type: "String"
+                description: "Date the Content item was first published on."
+            alwaysAvailable:
+                type: "Boolean"
+                description: "Indicates if the Content object is shown in the mainlanguage if its not present in an other requested language."
+            remoteId:
+                type: "String"
+                description: "A global unique id of the Content object"
+            mainLanguageCode:
+                type: "String"
+                description: "The main language code of the Content object. If the available flag is set to true the Content is shown in this language if the requested language does not exist."
+            mainLocationId:
+                type: "Int"
+                description: "Identifier of the Content item's main location."

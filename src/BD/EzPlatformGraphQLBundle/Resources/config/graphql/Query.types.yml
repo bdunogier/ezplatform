@@ -1,0 +1,12 @@
+Query:
+    type: object
+    config:
+        description: "eZ Platform repository"
+        fields:
+            location:
+                type: "Location"
+                args:
+                    id:
+                        description: "Resolves using the unique location id."
+                        type: "Int"
+                resolve: "@=resolver('Location', [args])"

@@ -37,3 +37,7 @@ app.submitted:
 _contentOnTheFly:
     resource: "@ContentOnTheFlyBundle/Resources/config/routing.yml"
     prefix:   '%ezpublish_rest.path_prefix%'
+
+overblog_graphql_endpoint:
+    resource: "@OverblogGraphQLBundle/Resources/config/routing/graphql.yml"
+    prefix: /graphql
