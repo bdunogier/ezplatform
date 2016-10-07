@@ -24,7 +24,7 @@ web:
             # The public directory of the app, relative to its root.
             root: "web"
             # The front-controller script to send non-static requests to.
-            passthru: "/app.php"
+            passthru: "/app_dev.php"
             # The number of seconds whitelisted (static) content should be cache
             expires: 600
 
