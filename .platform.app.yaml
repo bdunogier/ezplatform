@@ -40,7 +40,7 @@ mounts:
 # The hooks that will be performed when the package is deployed.
 hooks:
     build: |
-        rm web/app_dev.php
+        #rm web/app_dev.php
         app/console --env=prod assetic:dump
     deploy: |
         set -e
