@@ -49,7 +49,7 @@
         "components/font-awesome": "4.4.0",
         "ezsystems/comments-bundle": "~6.0.0",
         "ezsystems/content-on-the-fly-prototype": "~0.1.0",
-        "ezsystems/platform-ui-search-prototype-bundle": "~0.1.0"
+        "ezsystems/platform-ui-search-prototype-bundle": "~0.1.0",
         "overblog/graphql-bundle": "^0.6.0"
     },
     "require-dev": {
