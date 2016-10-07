@@ -11,15 +11,16 @@ ContentInfo:
                 type: "Int!"
                 description: "The Content Type ID of the Content item."
             contentType:
-                type: "ContentType!"
+                type: "ContentType"
                 description: "The Content Type of the Content item."
                 resolve: "@=resolver('ContentTypeById', [value.contentTypeId])"
             name:
                 type: "String"
                 description: "The computed name (via name schema) in the main language of the Content item."
-            sectionId:
-                type: "Int"
+            section:
+                type: "Section"
                 description: "The section to which the Content object is assigned."
+                resolve: "@=resolver('SectionById', [value.sectionId])"
             currentVersionNo:
                 type: "Int"
                 description: "Version number of the published version, or 1 for a newly created draft."

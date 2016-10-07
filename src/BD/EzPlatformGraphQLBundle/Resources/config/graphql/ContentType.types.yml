@@ -6,19 +6,25 @@ ContentType:
             id:
                 type: "Int!"
                 description: "The Content Type's unique ID."
-                resolve:
             #contentTypeGroups:
             #    type: "[ContentTypeGroup]"
             #    description: "ContentType Groups the ContentType is a member of."
-            #fieldDefinitions:
-            #    type: "[FieldDefinition]"
-            #    description: "The ContentType's Field Definitions."
+            fieldDefinitions:
+                type: "[FieldDefinition]"
+                description: "The ContentType's Field Definitions."
+                resolve: "@=value.getFieldDefinitions()"
             status:
                 type: "Int"
                 description: "The status of the content type. One of ContentType::STATUS_DEFINED|ContentType::STATUS_DRAFT|ContentType::STATUS_MODIFIED."
             identifier:
                 type: "String"
                 description: "The identifier of the Content Type."
+            #name:
+            #   type: "String"
+            #   description: "The Content Type's name in the main language"
+            #names:
+            #   type: "[Name]"
+            #   description: "The Content Type's names in all languages"
             creationDate:
                 type: "String"
                 description: "The date of the creation of this Content Type."

@@ -7,6 +7,14 @@ services:
         tags:
             - { name: overblog_graphql.resolver, alias: "Location", method: "resolveLocation" }
 
+    bd_ezplatform_graphql.graph.resolver.content:
+        class: BD\EzPlatformGraphQLBundle\GraphQL\Resolver\ContentResolver
+        arguments:
+            - "@ezpublish.api.service.content"
+        tags:
+            - { name: overblog_graphql.resolver, alias: "Content", method: "resolveContent" }
+            - { name: overblog_graphql.resolver, alias: "ContentFields", method: "resolveContentFields" }
+
     bd_ezplatform_graphql.graph.resolver.content_type:
         class: BD\EzPlatformGraphQLBundle\GraphQL\Resolver\ContentTypeResolver
         arguments:
@@ -14,3 +22,11 @@ services:
             - "@ezpublish.api.service.content_type"
         tags:
             - { name: overblog_graphql.resolver, alias: "ContentTypeById", method: "resolveContentTypeById" }
+            - { name: overblog_graphql.resolver, alias: "ContentType", method: "resolveContentType" }
+
+    bd_ezplatform_graphql.graph.resolver.section:
+        class: BD\EzPlatformGraphQLBundle\GraphQL\Resolver\SectionResolver
+        arguments:
+            - "@ezpublish.api.service.section"
+        tags:
+            - { name: overblog_graphql.resolver, alias: "SectionById", method: "resolveSectionById" }

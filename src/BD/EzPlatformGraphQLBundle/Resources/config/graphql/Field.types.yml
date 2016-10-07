@@ -1,0 +1,17 @@
+Field:
+    type: object
+    config:
+        description: "An eZ Platform Content Field."
+        fields:
+            id:
+                type: "Int"
+                description: "Internal id of the field."
+            fieldDefIdentifier:
+                type: "String"
+                description: "The field definition identifier."
+            value:
+                type: "String"
+                description: "The value of the field."
+            languageCode:
+                type: "String"
+                description: "The language code of the field."

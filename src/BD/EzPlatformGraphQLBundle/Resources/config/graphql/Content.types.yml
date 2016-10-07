@@ -1,0 +1,20 @@
+Content:
+    type: object
+    config:
+        description: "An eZ Platform repository Content."
+        fields:
+            contentInfo:
+                type: "ContentInfo"
+                description: "The Content item's unique ID."
+            id:
+                type: "Int"
+                description: "Shortcut to contentInfo.id."
+            fields:
+                type: "[Field]"
+                description: "The Content item's Fields."
+                args:
+                    identifier:
+                        description: "Filter by field def identifier"
+                        type: "String"
+                resolve: "@=resolver('ContentFields', [value, args])"
+

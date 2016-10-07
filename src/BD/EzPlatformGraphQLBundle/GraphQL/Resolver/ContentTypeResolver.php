@@ -30,4 +30,15 @@ class ContentTypeResolver
     {
         return $this->contentTypeService->loadContentType($contentTypeId);
     }
+
+    public function resolveContentType($args)
+    {
+        if (isset($args['id'])) {
+            return $this->resolveContentTypeById($args['id']);
+        }
+
+        if (isset($args['identifier'])) {
+            return $this->contentTypeService->loadContentTypeByIdentifier($args['identifier']);
+        }
+    }
 }

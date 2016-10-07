@@ -10,3 +10,20 @@ Query:
                         description: "Resolves using the unique location id."
                         type: "Int"
                 resolve: "@=resolver('Location', [args])"
+            content:
+                type: "Content"
+                args:
+                    id:
+                        description: "Resolves using the unique Content id."
+                        type: "Int"
+                resolve: "@=resolver('Content', [args])"
+            contentType:
+                type: "ContentType"
+                args:
+                    id:
+                        description: "Resolves using the unique ContentType id."
+                        type: "Int"
+                    identifier:
+                        description: "Resolves using the unique ContentType identifier."
+                        type: "String"
+                resolve: "@=resolver('ContentType', [args])"
