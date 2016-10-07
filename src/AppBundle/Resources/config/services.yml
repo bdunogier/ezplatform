@@ -1,0 +1,87 @@
+services:
+    app.installer:
+        parent: ezplatform.installer.db_based_installer
+        class: AppBundle\Installer\AppInstaller
+        tags:
+            - { name: ezplatform.installer, type: demo }
+
+    app.criteria.menu:
+        class: AppBundle\Criteria\Menu
+
+    app.controller.menu:
+        class: AppBundle\Controller\MenuController
+        arguments:
+            - '@templating'
+            - '@ezpublish.api.service.search'
+            - '@ezpublish.api.service.location'
+            - '@ezpublish.config.resolver'
+            - '@app.criteria.menu'
+            - '%app.top_menu.location_id%'
+
+    app.criteria.children:
+        class: AppBundle\Criteria\Children
+
+    app.controller.blog:
+        class: AppBundle\Controller\BlogController
+        arguments:
+            - '@ezpublish.api.service.content'
+            - '@ezpublish.api.service.search'
+            - '@ezpublish.api.service.location'
+            - '@ezpublish.config.resolver'
+            - '@app.criteria.children'
+            - '%app.blog_post.random_posts_limit%'
+            - '%app.blog_post_list_limit%'
+
+    app.controller.home:
+        class: AppBundle\Controller\HomeController
+        arguments:
+            - '@ezpublish.api.service.content'
+            - '@ezpublish.api.service.search'
+            - '@ezpublish.api.service.location'
+            - '@ezpublish.config.resolver'
+            - '@app.criteria.children'
+            - '%app.home.blog_post_limit%'
+            - '%app.home.blog_location_id%'
+            - '%app.home.gallery_image_limit%'
+            - '%app.home.gallery_location_id%'
+
+    app.form.type.contact:
+        class: AppBundle\Form\Type\ContactType
+        tags:
+            - { name: form.type, alias: app_contact }
+
+    app.entity.message:
+        class: AppBundle\Entity\Message
+
+    app.form.contact.form:
+        class: AppBundle\Form\Contact\Form
+        arguments:
+            - '@app.entity.message'
+            - '@app.form.type.contact'
+            - '@form.factory'
+
+    app.controller.contactform:
+        class: AppBundle\Controller\ContactFormController
+        arguments:
+            - '@app.form.type.contact'
+            - '@app.form.contact.form'
+            - '@app.mail.sender'
+            - '@templating'
+            - '@hautelook.router.template'
+            - '%app.contact_form.sender_email%'
+            - '%app.contact_form.recipient_email%'
+            - '%app.contact_form.email_title%'
+
+    app.mail.sender:
+        class: AppBundle\Mail\Sender
+        arguments:
+            - '@mailer'
+
+    app.controller.gallery:
+        class: AppBundle\Controller\GalleryController
+        arguments:
+            - '@ezpublish.api.service.content'
+            - '@ezpublish.api.service.search'
+            - '@ezpublish.config.resolver'
+            - '@app.criteria.children'
+            - '%app.gallery.images_limit%'
