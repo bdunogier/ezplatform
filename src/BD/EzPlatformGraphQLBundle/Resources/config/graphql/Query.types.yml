@@ -47,3 +47,11 @@ Query:
                         description: "ID of the Location to get children for"
                         type: "Int"
                 resolve: "@=resolver('LocationChildren', [args])"
+            contentTypes:
+                type: "[ContentType]"
+                args:
+                    groupId:
+                        type: "String"
+                    groupIdentifier:
+                        type: "String"
+                resolve: "@=resolver('ContentTypesFromGroup', [args])"

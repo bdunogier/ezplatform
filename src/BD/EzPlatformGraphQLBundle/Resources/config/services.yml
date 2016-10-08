@@ -34,6 +34,7 @@ services:
         tags:
             - { name: overblog_graphql.resolver, alias: "ContentTypeById", method: "resolveContentTypeById" }
             - { name: overblog_graphql.resolver, alias: "ContentType", method: "resolveContentType" }
+            - { name: overblog_graphql.resolver, alias: "ContentTypesFromGroup", method: "resolveContentTypesFromGroup" }
 
     bd_ezplatform_graphql.graph.resolver.section:
         class: BD\EzPlatformGraphQLBundle\GraphQL\Resolver\SectionResolver
