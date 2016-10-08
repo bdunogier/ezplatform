@@ -30,6 +30,10 @@ ContentInfo:
             ownerId:
                 type: "Int"
                 description: "The user id of the owner of the Content object"
+            owner:
+                type: "User"
+                description: "The owner user of the Content object"
+                resolve: "@=resolver('UserById', [value.ownerId])"
             modificationDate:
                 type: "String"
                 description: "Date the Content item was last modified on."

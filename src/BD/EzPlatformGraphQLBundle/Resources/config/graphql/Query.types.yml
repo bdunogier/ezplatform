@@ -17,6 +17,19 @@ Query:
                         description: "Resolves using the unique Content id."
                         type: "Int"
                 resolve: "@=resolver('Content', [args])"
+            user:
+                type: "User"
+                args:
+                    id:
+                        description: "Load user by ID."
+                        type: "Int"
+                    email:
+                        description: "Load user by email address."
+                        type: "Int"
+                    login:
+                        description: "Load user by login."
+                        type: "Int"
+                resolve: "@=resolver('User', [args])"
             contentType:
                 type: "ContentType"
                 args:

@@ -1,0 +1,34 @@
+User:
+    type: object
+    config:
+        description: "An eZ Platform repository User."
+        fields:
+            id:
+                type: "Int"
+                description: "The Content item's id. Shortcut to ContentInfo {id}."
+            contentInfo:
+                type: "ContentInfo"
+                description: "The Content item's meta informations."
+            fields:
+                type: "[Field]"
+                description: "The Content item's Fields."
+                args:
+                    identifier:
+                        description: "Filter by field def identifier"
+                        type: "String"
+                resolve: "@=resolver('ContentFields', [value, args])"
+            versionInfo:
+                type: "VersionInfo"
+                description: "Current version metadata"
+            login:
+                type: "String"
+            email:
+                type: "String"
+            passwordHash:
+                type: "String"
+            hashAlgorithm:
+                type: "String"
+            enabled:
+                type: "Boolean"
+            maxLogin:
+                type: "Int"
