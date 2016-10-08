@@ -41,6 +41,24 @@ class UserResolver
         return $this->userService->loadUser($userId);
     }
 
+    /**
+     * @return \eZ\Publish\API\Repository\Values\User\UserGroup[]
+     */
+    public function resolveUserGroupsByUserId($userId)
+    {
+        return $this->userService->loadUserGroupsOfUser(
+            $this->userService->loadUser($userId)
+        );
+    }
+
+    /**
+     * @return \eZ\Publish\API\Repository\Values\User\UserGroup
+     */
+    public function resolveUserGroupById($userGroupId)
+    {
+        return $this->userService->loadUserGroup($userGroupId);
+    }
+
     public function resolveContentFields(Content $content, $args)
     {
         if (isset($args['identifier'])) {

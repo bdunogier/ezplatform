@@ -52,3 +52,11 @@ ContentInfo:
             mainLocationId:
                 type: "Int"
                 description: "Identifier of the Content item's main location."
+            mainLocation:
+                type: "Location"
+                description: "Content item's main location."
+                resolve: "@=resolver('LocationById', [value.mainLocationId])"
+            locations:
+                type: "[Location]"
+                description: "All the locations of the Content item"
+                resolve: "@=resolver('LocationsByContentId', [value.id])"

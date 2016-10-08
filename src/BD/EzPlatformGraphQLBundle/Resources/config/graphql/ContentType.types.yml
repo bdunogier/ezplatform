@@ -19,12 +19,16 @@ ContentType:
             identifier:
                 type: "String"
                 description: "The identifier of the Content Type."
-            #name:
-            #   type: "String"
-            #   description: "The Content Type's name in the main language"
-            #names:
-            #   type: "[Name]"
-            #   description: "The Content Type's names in all languages"
+            name:
+                type: "String"
+                description: "The Content Type's name in the main language"
+                args:
+                    languageCode:
+                        type: "String!"
+                resolve: "@=value.getName(args['languageCode'])"
+            names:
+                type: "[String]"
+                description: "The Content Type's names in all languages"
             creationDate:
                 type: "String"
                 description: "The date of the creation of this Content Type."
@@ -34,15 +38,17 @@ ContentType:
             creatorId:
                 type: "Int"
                 description: "The user id of the creator of this Content Type."
-            #creator:
-            #    type: "User"
-            #    description: "The user who created this Content Type."
+            creator:
+                type: "User"
+                description: "The user who created this Content Type."
+                resolve: "@=resolver('UserById', [value.creatorId])"
             modifierId:
                 type: "Int"
                 description: "The user id of the user which has last modified this content type"
-            #modifier:
-            #    type: "User"
-            #    description: "The user which has last modified this content type"
+            modifier:
+                type: "User"
+                description: "The user which has last modified this content type"
+                resolve: "@=resolver('UserById', [value.modifierId])"
             remoteId:
                 type: "String"
                 description: "A global unique id of the Content Type."
@@ -67,3 +73,32 @@ ContentType:
             defaultSortOrder:
                 type: "Int"
                 description: "Specifies whether the sort order should be ascending or descending by default when created. Valid values are {@link Location::SORT_ORDER_*}"
+            groups:
+                type: "[ContentTypeGroup]"
+                resolve: "@=value.contentTypeGroups"
+
+ContentTypeGroup:
+    type: object
+    config:
+        fields:
+            id:
+                type: "Int"
+            identifier:
+                type: "String"
+            creationDate:
+                type: "String"
+            modificationDate:
+                type: "String"
+            creatorId:
+                type: "Int"
+            creator:
+                type: "User"
+                resolve: "@=resolver('UserById', [value.creatorId])"
+            modifierId:
+                type: "Int"
+            modifier:
+                type: "User"
+                resolve: "@=resolver('UserById', [value.modifierId])"
+            contentTypes:
+                type: "[ContentType]"
+                resolve: "@=resolver('ContentTypesFromGroup', {'groupId': value.id})"

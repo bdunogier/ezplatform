@@ -39,9 +39,9 @@ Location:
             pathString:
                 type: "String"
                 description: "The path to the Location in the Tree."
-            #path:
-            #   type:
-            #   description: Same as $pathString but as array, e.g. [ 1, 2, 4, 23 ]
+            path:
+                type: "[Int]"
+                description: "Same as $pathString but as array, e.g. [ 1, 2, 4, 23 ]"
             depth:
                 type: "Int"
                 description: "Depth location has in the location tree"

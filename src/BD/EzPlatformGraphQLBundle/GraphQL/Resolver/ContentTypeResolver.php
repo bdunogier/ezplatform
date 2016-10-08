@@ -6,6 +6,7 @@
 namespace BD\EzPlatformGraphQLBundle\GraphQL\Resolver;
 
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use Overblog\GraphQLBundle\Resolver\TypeResolver;
 
 class ContentTypeResolver
@@ -39,10 +40,18 @@ class ContentTypeResolver
         }
 
         if (isset($group)) {
-            return $this->contentTypeService->loadContentTypes($group);
+            $contentTypes = $this->contentTypeService->loadContentTypes($group);
+        } else {
+            $contentTypes = [];
+            foreach ($this->contentTypeService->loadContentTypeGroups() as $group) {
+                $contentTypes = array_merge(
+                    $contentTypes,
+                    $this->contentTypeService->loadContentTypes($group)
+                );
+            }
         }
 
-        return null;
+        return $contentTypes;
     }
 
     public function resolveContentTypeById($contentTypeId)

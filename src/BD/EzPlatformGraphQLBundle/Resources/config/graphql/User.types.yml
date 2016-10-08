@@ -32,3 +32,31 @@ User:
                 type: "Boolean"
             maxLogin:
                 type: "Int"
+            groups:
+                type: "[UserGroup]"
+                resolve: "@=resolver('UserGroupsByUserId', [value.id])"
+
+UserGroup:
+    type: object
+    config:
+        fields:
+            id:
+                type: "Int"
+                description: "The Content item's id. Shortcut to ContentInfo {id}."
+            contentInfo:
+                type: "ContentInfo"
+                description: "The Content item's meta informations."
+            fields:
+                type: "[Field]"
+                description: "The Content item's Fields."
+                args:
+                    identifier:
+                        description: "Filter by field def identifier"
+                        type: "String"
+                resolve: "@=resolver('ContentFields', [value, args])"
+            versionInfo:
+                type: "VersionInfo"
+                description: "Current version metadata"
+            parentGroup:
+                type: "UserGroup"
+                resolve: "@=resolver('UserGroupById', [value.parentId])"

@@ -3,10 +3,12 @@ services:
         class: BD\EzPlatformGraphQLBundle\GraphQL\Resolver\LocationResolver
         arguments:
             - "@ezpublish.api.service.location"
+            - "@ezpublish.api.service.content"
         tags:
             - { name: overblog_graphql.resolver, alias: "Location", method: "resolveLocation" }
             - { name: overblog_graphql.resolver, alias: "LocationById", method: "resolveLocationById" }
             - { name: overblog_graphql.resolver, alias: "LocationChildren", method: "resolveLocationChildren" }
+            - { name: overblog_graphql.resolver, alias: "LocationsByContentId", method: "resolveLocationsByContentId" }
 
     bd_ezplatform_graphql.graph.resolver.content:
         class: BD\EzPlatformGraphQLBundle\GraphQL\Resolver\ContentResolver
@@ -25,6 +27,8 @@ services:
             - { name: overblog_graphql.resolver, alias: "User", method: "resolveUser" }
             #- { name: overblog_graphql.resolver, alias: "UserFields", method: "resolveUserFields" }
             - { name: overblog_graphql.resolver, alias: "UserById", method: "resolveUserById" }
+            - { name: overblog_graphql.resolver, alias: "UserGroupsByUserId", method: "resolveUserGroupsByUserId" }
+            - { name: overblog_graphql.resolver, alias: "UserGroupById", method: "resolveUserGroupById" }
 
     bd_ezplatform_graphql.graph.resolver.content_type:
         class: BD\EzPlatformGraphQLBundle\GraphQL\Resolver\ContentTypeResolver
@@ -35,6 +39,7 @@ services:
             - { name: overblog_graphql.resolver, alias: "ContentTypeById", method: "resolveContentTypeById" }
             - { name: overblog_graphql.resolver, alias: "ContentType", method: "resolveContentType" }
             - { name: overblog_graphql.resolver, alias: "ContentTypesFromGroup", method: "resolveContentTypesFromGroup" }
+            - { name: overblog_graphql.resolver, alias: "ContentTypeGroupsFromContentType", method: "resolveGroupsFromContentType" }
 
     bd_ezplatform_graphql.graph.resolver.section:
         class: BD\EzPlatformGraphQLBundle\GraphQL\Resolver\SectionResolver
