@@ -6,8 +6,12 @@
 namespace BD\EzPlatformGraphQLBundle\GraphQL\Resolver;
 
 use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use eZ\Publish\API\Repository\Values\Content\Query;
+use eZ\Publish\API\Repository\Values\Content\Relation;
+use eZ\Publish\API\Repository\Values\Content\Search\SearchHit;
 
 class ContentResolver
 {
@@ -16,15 +20,56 @@ class ContentResolver
      */
     private $contentService;
 
-    public function __construct(ContentService $contentService)
+    /**
+     * @var SearchService
+     */
+    private $searchService;
+
+    public function __construct(ContentService $contentService, SearchService $searchService)
     {
         $this->contentService = $contentService;
+        $this->searchService = $searchService;
+    }
+
+    public function findContentByType($contentTypeId)
+    {
+        $searchResults = $this->searchService->findContentInfo(
+            new Query([
+                'filter' => new Query\Criterion\ContentTypeId($contentTypeId)
+            ])
+        );
+
+        return array_map(
+            function(SearchHit $searchHit) {
+                return $searchHit->valueObject;
+            },
+            $searchResults->searchHits
+        );
+    }
+
+    /**
+     * @return \eZ\Publish\API\Repository\Values\Content\Relation[]
+     */
+    public function findContentRelations(ContentInfo $contentInfo, $version = null)
+    {
+        return $this->contentService->loadRelations(
+            $this->contentService->loadVersionInfo($contentInfo, $version)
+        );
+    }
+
+    public function findContentReverseRelations(ContentInfo $contentInfo, $version = null)
+    {
+        return $this->contentService->loadReverseRelations($contentInfo);
     }
 
     public function resolveContent($args)
     {
         if (isset($args['id'])) {
             return $this->contentService->loadContentInfo($args['id']);
+        }
+
+        if (isset($args['remoteId'])) {
+            return $this->contentService->loadContentInfoByRemoteId($args['remoteId']);
         }
     }
 

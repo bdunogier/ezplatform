@@ -14,12 +14,16 @@ services:
         class: BD\EzPlatformGraphQLBundle\GraphQL\Resolver\ContentResolver
         arguments:
             - "@ezpublish.api.service.content"
+            - "@ezpublish.api.service.search"
         tags:
             - { name: overblog_graphql.resolver, alias: "Content", method: "resolveContent" }
             - { name: overblog_graphql.resolver, alias: "ContentFields", method: "resolveContentFields" }
             - { name: overblog_graphql.resolver, alias: "ContentById", method: "resolveContentById" }
             - { name: overblog_graphql.resolver, alias: "ContentVersions", method: "resolveContentVersions" }
             - { name: overblog_graphql.resolver, alias: "ContentFieldsInVersion", method: "resolveContentFieldsInVersion" }
+            - { name: overblog_graphql.resolver, alias: "ContentByType", method: "findContentByType" }
+            - { name: overblog_graphql.resolver, alias: "ContentRelations", method: "findContentRelations" }
+            - { name: overblog_graphql.resolver, alias: "ContentReverseRelations", method: "findContentReverseRelations" }
 
     bd_ezplatform_graphql.graph.resolver.user:
         class: BD\EzPlatformGraphQLBundle\GraphQL\Resolver\UserResolver

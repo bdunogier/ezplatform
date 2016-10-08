@@ -76,7 +76,9 @@ ContentType:
             groups:
                 type: "[ContentTypeGroup]"
                 resolve: "@=value.contentTypeGroups"
-
+            content:
+                type: "[Content]"
+                resolve: "@=resolver('ContentByType', [value.id])"
 ContentTypeGroup:
     type: object
     config:
