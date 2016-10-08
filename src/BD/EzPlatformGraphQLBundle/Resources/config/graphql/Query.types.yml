@@ -16,9 +16,6 @@ Query:
                     id:
                         description: "Resolves using the unique Content id."
                         type: "Int"
-                    version:
-                        description: "Specific version of the content item. Current one if not specified."
-                        type: "Int"
                 resolve: "@=resolver('Content', [args])"
             user:
                 type: "User"

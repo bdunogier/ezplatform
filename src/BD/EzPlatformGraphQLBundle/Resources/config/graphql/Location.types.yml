@@ -13,9 +13,10 @@ Location:
                 type: "Content"
                 description: "The Content item referenced by the Location."
                 resolve: "@=resolver('ContentById', [value.contentId])"
-            contentInfo:
-                type: "ContentInfo"
+            content:
+                type: "Content"
                 description: "The referenced Content item's metadata."
+                resolver: "@=value.contentInfo"
             priority:
                 type: "Int"
                 description: "Position of the Location among its siblings when sorted using priority/"
