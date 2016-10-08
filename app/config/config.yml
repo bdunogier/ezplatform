@@ -11,7 +11,7 @@ overblog_graphql:
         config_validation: %kernel.debug%
         schema:
             query: Query
-            mutation: ~
+            mutation: ExampleMutation
 
 # Configuration for Database connection, can have several connections used by eZ Repositories in ezplatform.yml
 doctrine:

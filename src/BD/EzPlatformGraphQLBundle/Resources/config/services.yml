@@ -32,3 +32,11 @@ services:
             - "@ezpublish.api.service.section"
         tags:
             - { name: overblog_graphql.resolver, alias: "SectionById", method: "resolveSectionById" }
+
+    bd_ezplatform_graphql.graph.mutation.section:
+        class: BD\EzPlatformGraphQLBundle\GraphQL\Mutation\SectionMutation
+        arguments:
+            - "@ezpublish.api.service.section"
+        tags:
+            - { name: "overblog_graphql.mutation", alias: "CreateSection", method: "createSection" }
+            - { name: "overblog_graphql.mutation", alias: "DeleteSection", method: "deleteSection" }
