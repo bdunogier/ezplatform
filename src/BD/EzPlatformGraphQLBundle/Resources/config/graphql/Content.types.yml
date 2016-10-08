@@ -3,12 +3,12 @@ Content:
     config:
         description: "An eZ Platform repository Content."
         fields:
-            contentInfo:
-                type: "ContentInfo"
-                description: "The Content item's unique ID."
             id:
                 type: "Int"
-                description: "Shortcut to contentInfo.id."
+                description: "The Content item's id. Shortcut to ContentInfo {id}."
+            contentInfo:
+                type: "ContentInfo"
+                description: "The Content item's meta informations."
             fields:
                 type: "[Field]"
                 description: "The Content item's Fields."
@@ -17,6 +17,10 @@ Content:
                         description: "Filter by field def identifier"
                         type: "String"
                 resolve: "@=resolver('ContentFields', [value, args])"
+            versionInfo:
+                type: "VersionInfo"
+                description: "Current version metadata"
+
 ContentCreateStruct:
     type: object
     config:

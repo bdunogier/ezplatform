@@ -23,7 +23,17 @@ class ContentResolver
     public function resolveContent($args)
     {
         if (isset($args['id'])) {
-            return $this->contentService->loadContent($args['id']);
+            if (isset($args['version'])) {
+                return $this->contentService->loadContentByVersionInfo(
+                    $this->contentService->loadVersionInfo(
+                        $this->contentService->loadContentInfo($args['id']),
+                        $args['version']
+                    )
+                );
+
+            } else {
+                return $this->contentService->loadContent($args['id']);
+            }
         }
     }
 

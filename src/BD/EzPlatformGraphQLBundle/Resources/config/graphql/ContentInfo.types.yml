@@ -24,6 +24,13 @@ ContentInfo:
             currentVersionNo:
                 type: "Int"
                 description: "Version number of the published version, or 1 for a newly created draft."
+            currentVersion:
+                type: "VersionInfo"
+                description: "The currently published content item version"
+                resolve: "@=resolver('LoadVersion', [value.id, value.currentVersionNo])"
+            versions:
+                type: "[VersionInfo]"
+                description: "All content versions."
             published:
                 type: "Boolean"
                 description: "If the Content item has a published version."

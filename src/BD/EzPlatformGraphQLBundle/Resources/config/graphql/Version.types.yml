@@ -1,0 +1,33 @@
+VersionInfo:
+    type: object
+    config:
+        description: "Content Version metadata"
+        fields:
+            id:
+                type: "Int"
+            versionNumber:
+                type: "Int"
+            contentInfo:
+                type: "ContentInfo"
+            names:
+                type: "[String]"
+            name:
+                type: "String"
+                args:
+                    languageCode:
+                        type: "String"
+            modificationDate:
+                type: "String"
+            creationDate:
+                type: "String"
+            creatorId:
+                type: "Int"
+            #creator:
+            #    type: "User"
+            status:
+                type: "Int"
+            initialLanguageCode:
+                type: "String"
+            languageCodes:
+                type: "[String]"
+
