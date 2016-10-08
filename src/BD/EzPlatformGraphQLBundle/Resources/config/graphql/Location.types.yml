@@ -6,7 +6,6 @@ Location:
             id:
                 type: "Int!"
                 description: "The unique ID of the location."
-                resolve:
             contentId:
                 type: "Int!"
                 description: "The ID of the Content item referenced by the Location."
@@ -45,3 +44,6 @@ Location:
             depth:
                 type: "Int"
                 description: "Depth location has in the location tree"
+            children:
+                type: "[Location]"
+                resolve: "@=resolver('LocationChildren', [{'id': value.id}])"
