@@ -27,6 +27,11 @@ class ContentResolver
         }
     }
 
+    public function resolveContentById($contentId)
+    {
+        return $this->contentService->loadContent($contentId);
+    }
+
     public function resolveContentFields(Content $content, $args)
     {
         if (isset($args['identifier'])) {

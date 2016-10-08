@@ -2,10 +2,11 @@ services:
     bd_ezplatform_graphql.graph.resolver.location:
         class: BD\EzPlatformGraphQLBundle\GraphQL\Resolver\LocationResolver
         arguments:
-            - "@overblog_graphql.type_resolver"
             - "@ezpublish.api.service.location"
         tags:
             - { name: overblog_graphql.resolver, alias: "Location", method: "resolveLocation" }
+            - { name: overblog_graphql.resolver, alias: "LocationById", method: "resolveLocationById" }
+            - { name: overblog_graphql.resolver, alias: "LocationChildren", method: "resolveLocationChildren" }
 
     bd_ezplatform_graphql.graph.resolver.content:
         class: BD\EzPlatformGraphQLBundle\GraphQL\Resolver\ContentResolver
@@ -14,6 +15,7 @@ services:
         tags:
             - { name: overblog_graphql.resolver, alias: "Content", method: "resolveContent" }
             - { name: overblog_graphql.resolver, alias: "ContentFields", method: "resolveContentFields" }
+            - { name: overblog_graphql.resolver, alias: "ContentById", method: "resolveContentById" }
 
     bd_ezplatform_graphql.graph.resolver.content_type:
         class: BD\EzPlatformGraphQLBundle\GraphQL\Resolver\ContentTypeResolver

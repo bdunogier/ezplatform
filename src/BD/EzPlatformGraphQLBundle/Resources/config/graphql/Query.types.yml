@@ -27,3 +27,10 @@ Query:
                         description: "Resolves using the unique ContentType identifier."
                         type: "String"
                 resolve: "@=resolver('ContentType', [args])"
+            locationChildren:
+                type: "[Location]"
+                args:
+                    id:
+                        description: "ID of the Location to get children for"
+                        type: "Int"
+                resolve: "@=resolver('LocationChildren', [args])"

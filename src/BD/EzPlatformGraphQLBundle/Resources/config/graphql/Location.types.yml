@@ -10,6 +10,10 @@ Location:
             contentId:
                 type: "Int!"
                 description: "The ID of the Content item referenced by the Location."
+            content:
+                type: "Content"
+                description: "The Content item referenced by the Location."
+                resolve: "@=resolver('ContentById', [value.contentId])"
             contentInfo:
                 type: "ContentInfo"
                 description: "The referenced Content item's metadata."
@@ -28,6 +32,10 @@ Location:
             parentLocationId:
                 type: "Int"
                 description: "The id of the parent location"
+            parentLocation:
+                type: "Location"
+                description: "The parent location"
+                resolve: "@=resolver('LocationById', [value.parentLocationId])"
             pathString:
                 type: "String"
                 description: "The path to the Location in the Tree."
