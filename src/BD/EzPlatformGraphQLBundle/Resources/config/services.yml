@@ -70,6 +70,15 @@ services:
             - { name: overblog_graphql.resolver, alias: "UrlAliasType", method: "resolveUrlAliasType" }
             - { name: overblog_graphql.resolver, alias: "LocationUrlAliases", method: "resolveLocationUrlAliases" }
 
+    bd_ezplatform_graphql.graph.resolver.field_value.richtext:
+        class: BD\EzPlatformGraphQLBundle\GraphQL\Resolver\RichTextResolver
+        arguments:
+            - "@ezpublish.fieldType.ezrichtext.converter.output.xhtml5"
+            - "@ezpublish.fieldType.ezrichtext.converter.edit.xhtml5"
+        tags:
+            - { name: overblog_graphql.resolver, alias: "RichTextXmlToHtml5", method: "xmlToHtml5" }
+            - { name: overblog_graphql.resolver, alias: "RichTextXmlToHtml5Edit", method: "xmlToHtml5Edit" }
+
     bd_ezplatform_graphql.graph.mutation.section:
         class: BD\EzPlatformGraphQLBundle\GraphQL\Mutation\SectionMutation
         arguments:

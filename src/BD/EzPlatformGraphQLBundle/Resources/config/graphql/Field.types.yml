@@ -269,6 +269,14 @@ RichTextFieldValue:
                 type: "String"
                 description: "String representation of the value"
                 resolve: "@=value.value"
+            html5:
+                type: "String"
+                description: "HTML5 representation."
+                resolve: "@=resolver('RichTextXmlToHtml5', [value.value.xml])"
+            html5_edit:
+                type: "String"
+                description: "Editable HTML5 representation."
+                resolve: "@=resolver('RichTextXmlToHtml5Edit', [value.value.xml])"
 
 SelectionFieldValue:
     type: object
