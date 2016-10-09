@@ -5,13 +5,17 @@
  */
 namespace BD\EzPlatformGraphQLBundle\GraphQL\Resolver;
 
+use BD\EzPlatformGraphQLBundle\GraphQL\Value\ContentFieldValue;
 use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use eZ\Publish\API\Repository\Values\Content\Field;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\Relation;
 use eZ\Publish\API\Repository\Values\Content\Search\SearchHit;
+use Overblog\GraphQLBundle\Resolver\TypeResolver;
 
 class ContentResolver
 {
@@ -25,10 +29,22 @@ class ContentResolver
      */
     private $searchService;
 
-    public function __construct(ContentService $contentService, SearchService $searchService)
+    /**
+     * @var ContentTypeService
+     */
+    private $contentTypeService;
+
+    /**
+     * @var TypeResolver
+     */
+    private $typeResolver;
+
+    public function __construct(ContentService $contentService, SearchService $searchService, ContentTypeService $contentTypeService, TypeResolver $typeResolver)
     {
         $this->contentService = $contentService;
         $this->searchService = $searchService;
+        $this->contentTypeService = $contentTypeService;
+        $this->typeResolver = $typeResolver;
     }
 
     public function findContentByType($contentTypeId)
@@ -88,10 +104,46 @@ class ContentResolver
         );
 
         if (isset($args['identifier'])) {
-            return [$content->getField($args['identifier'])];
+            $field = $content->getField($args['identifier']);
+            $value = new ContentFieldValue(
+                [
+                    'contentId' => $contentId,
+                    'fieldDefIdentifier' => $field->fieldDefIdentifier,
+                    'value' => $field->value,
+                ]
+            );
+            return [
+                new Field(
+                    [
+                        'id' => $field->id,
+                        'value' => $value,
+                        'fieldDefIdentifier' => $field->fieldDefIdentifier,
+                        'languageCode' => $field->languageCode,
+                    ]
+                )
+            ];
         }
 
-        return $content->getFieldsByLanguage();
+        return array_map(
+            function(Field $field) use ($contentId) {
+                $value = new ContentFieldValue(
+                    [
+                        'contentId' => $contentId,
+                        'fieldDefIdentifier' => $field->fieldDefIdentifier,
+                        'value' => $field->value,
+                    ]
+                );
+                return new Field(
+                    [
+                        'id' => $field->id,
+                        'value' => $value,
+                        'fieldDefIdentifier' => $field->fieldDefIdentifier,
+                        'languageCode' => $field->languageCode,
+                    ]
+                );
+            },
+            $content->getFieldsByLanguage()
+        );
     }
 
     public function resolveContentFieldsInVersion($contentId, $versionNo, $args)
@@ -107,5 +159,24 @@ class ContentResolver
         return $this->contentService->loadVersions(
             $this->contentService->loadContentInfo($contentId)
         );
+    }
+
+    public function resolveFieldValueType(ContentFieldValue $field)
+    {
+        $contentInfo = $this->contentService->loadContentInfo($field->contentId);
+        $contentType = $this->contentTypeService->loadContentType($contentInfo->contentTypeId);
+        $fieldDefinition = $contentType->getFieldDefinition($field->fieldDefIdentifier);
+
+        $typesMap = [
+            'ezstring' => 'TextLineFieldValue',
+            'ezimage' => 'ImageFieldValue'
+        ];
+
+        $typeString =
+            isset($typesMap[$fieldDefinition->fieldTypeIdentifier]) ?
+            $typesMap[$fieldDefinition->fieldTypeIdentifier] :
+            'GenericFieldValue';
+
+        return $this->typeResolver->resolve($typeString);
     }
 }

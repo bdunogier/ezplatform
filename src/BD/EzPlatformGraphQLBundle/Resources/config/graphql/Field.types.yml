@@ -10,8 +10,69 @@ Field:
                 type: "String"
                 description: "The field definition identifier."
             value:
-                type: "String"
+                type: "FieldValue"
                 description: "The value of the field."
             languageCode:
                 type: "String"
                 description: "The language code of the field."
+
+FieldValue:
+    type: interface
+    config:
+        fields:
+            value:
+                type: "String"
+                description: "String representation of the value"
+        resolveType: "@=resolver('FieldValueType', [value])"
+
+
+GenericFieldValue:
+    type: object
+    config:
+        fields:
+            value:
+                type: "String"
+                description: "String representation of the value"
+                resolve: "@=value.value"
+        interfaces: [FieldValue]
+
+TextLineFieldValue:
+    type: object
+    config:
+        fields:
+            value:
+                type: "String"
+                description: "String representation of the value"
+                resolve: "@=value.value"
+        interfaces: [FieldValue]
+
+ImageFieldValue:
+    type: object
+    config:
+        fields:
+            value:
+                type: "String"
+                description: "String representation of the value"
+                resolve: "@=value.value"
+            id:
+                type: "String"
+                resolve: "@=value.value.id"
+            alternativeText:
+                type: "String"
+                resolve: "@=value.value.alternativeText"
+            fileName:
+                type: "String"
+                resolve: "@=value.value.fileName"
+            fileSize:
+                type: "Int"
+                resolve: "@=value.value.fileSize"
+            uri:
+                type: "String"
+                resolve: "@=value.value.uri"
+            width:
+                type: "Int"
+                resolve: "@=value.value.width"
+            height:
+                type: "Int"
+                resolve: "@=value.value.height"
+        interfaces: [FieldValue]

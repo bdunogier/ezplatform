@@ -6,6 +6,9 @@ User:
             id:
                 type: "Int"
                 description: "The Content item's id. Shortcut to ContentInfo {id}."
+            name:
+                type: "String"
+                resolve: "@=value.contentInfo.name"
             fields:
                 type: "[Field]"
                 description: "The Content item's Fields."
@@ -41,6 +44,9 @@ UserGroup:
             id:
                 type: "Int"
                 description: "The Content item's id. Shortcut to ContentInfo {id}."
+            name:
+                type: "String"
+                resolve: "@=value.contentInfo.name"
             fields:
                 type: "[Field]"
                 description: "The Content item's Fields."
