@@ -28,11 +28,21 @@ Query:
                         type: "Int"
                     email:
                         description: "Load user by email address."
-                        type: "Int"
+                        type: "String"
                     login:
                         description: "Load user by login."
-                        type: "Int"
+                        type: "String"
                 resolve: "@=resolver('User', [args])"
+            userGroups:
+                type: "[UserGroup]"
+                description: "All user groups."
+                args:
+                    id:
+                        type: "Int"
+                        description: "User group id to load. If not given, the root one is loaded."
+                        defaultValue: 5
+                resolve: "@=resolver('UserGroups', [args])"
+
             contentType:
                 type: "ContentType"
                 args:

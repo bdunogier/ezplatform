@@ -104,3 +104,6 @@ ContentTypeGroup:
             contentTypes:
                 type: "[ContentType]"
                 resolve: "@=resolver('ContentTypesFromGroup', {'groupId': value.id})"
+            groups:
+                type: "[ContentTypeGroup]"
+

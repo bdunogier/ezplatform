@@ -48,7 +48,7 @@ UserGroup:
                     identifier:
                         description: "Filter by field def identifier"
                         type: "String"
-                resolve: "@=resolver('ContentFields', [value, args])"
+                resolve: "@=resolver('ContentFields', [value.id, args])"
             version:
                 type: "Version"
                 description: "Current version"
@@ -56,3 +56,9 @@ UserGroup:
             parentGroup:
                 type: "UserGroup"
                 resolve: "@=resolver('UserGroupById', [value.parentId])"
+            subGroups:
+                type: "[UserGroup]"
+                resolve: "@=resolver('UserGroupSubGroups', [value])"
+            users:
+                type: "[User]"
+                resolve: "@=resolver('UsersOfGroup', [value])"

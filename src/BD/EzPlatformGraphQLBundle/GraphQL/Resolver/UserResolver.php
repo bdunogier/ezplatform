@@ -6,8 +6,10 @@
 namespace BD\EzPlatformGraphQLBundle\GraphQL\Resolver;
 
 use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\Values\Content\Content;
+use eZ\Publish\API\Repository\Values\User\UserGroup;
 
 class UserResolver
 {
@@ -15,10 +17,15 @@ class UserResolver
      * @var UserService
      */
     private $userService;
+    /**
+     * @var LocationService
+     */
+    private $locationService;
 
-    public function __construct(UserService $userService)
+    public function __construct(UserService $userService, LocationService $locationService)
     {
         $this->userService = $userService;
+        $this->locationService = $locationService;
     }
 
     public function resolveUser($args)
@@ -51,12 +58,33 @@ class UserResolver
         );
     }
 
+    public function resolveUsersOfGroup(UserGroup $userGroup)
+    {
+        return $this->userService->loadUsersOfUserGroup(
+            $userGroup
+        );
+    }
+
     /**
      * @return \eZ\Publish\API\Repository\Values\User\UserGroup
      */
     public function resolveUserGroupById($userGroupId)
     {
         return $this->userService->loadUserGroup($userGroupId);
+    }
+
+    public function resolveUserGroupSubGroups(UserGroup $userGroup)
+    {
+        return $this->userService->loadSubUserGroups($userGroup);
+    }
+
+    public function resolveUserGroups($args)
+    {
+        return $this->userService->loadSubUserGroups(
+            $this->userService->loadUserGroup(
+                $this->locationService->loadLocation($args['id'])->contentId
+            )
+        );
     }
 
     public function resolveContentFields(Content $content, $args)
