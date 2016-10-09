@@ -48,3 +48,9 @@ Location:
             children:
                 type: "[Location]"
                 resolve: "@=resolver('LocationChildren', [{'id': value.id}])"
+            urlAliases:
+                type: "[LocationUrlAlias]"
+                args:
+                    custom:
+                        type: "Boolean"
+                resolve: "@=resolver('LocationUrlAliases', [value, args])"

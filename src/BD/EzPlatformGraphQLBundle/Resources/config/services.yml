@@ -54,6 +54,15 @@ services:
         tags:
             - { name: overblog_graphql.resolver, alias: "SectionById", method: "resolveSectionById" }
 
+    bd_ezplatform_graphql.graph.resolver.url_alias:
+        class: BD\EzPlatformGraphQLBundle\GraphQL\Resolver\UrlAliasResolver
+        arguments:
+            - "@overblog_graphql.type_resolver"
+            - "@ezpublish.api.service.url_alias"
+        tags:
+            - { name: overblog_graphql.resolver, alias: "UrlAliasType", method: "resolveUrlAliasType" }
+            - { name: overblog_graphql.resolver, alias: "LocationUrlAliases", method: "resolveLocationUrlAliases" }
+
     bd_ezplatform_graphql.graph.mutation.section:
         class: BD\EzPlatformGraphQLBundle\GraphQL\Mutation\SectionMutation
         arguments:
