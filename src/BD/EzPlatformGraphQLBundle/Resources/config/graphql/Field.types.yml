@@ -76,3 +76,216 @@ ImageFieldValue:
                 type: "Int"
                 resolve: "@=value.value.height"
         interfaces: [FieldValue]
+
+AuthorFieldValue:
+    type: object
+    config:
+        interfaces: [FieldValue]
+        fields:
+            value:
+                type: "String"
+                description: "String representation of the value"
+                resolve: "@=value.value"
+            authors:
+                type: "[Author]"
+                resolve: "@=value.value.authors"
+Author:
+    type: object
+    config:
+        fields:
+            id:
+                type: "Int"
+            name:
+                type: "String"
+            email:
+                type: "String"
+
+BinaryFileFieldValue:
+    type: object
+    config:
+        interfaces: [FieldValue]
+        fields:
+            value:
+                type: "String"
+                description: "String representation of the value"
+                resolve: "@=value.value"
+
+CheckboxFieldValue:
+    type: object
+    config:
+        interfaces: [FieldValue]
+        fields:
+            value:
+                type: "String"
+                description: "String representation of the value"
+                resolve: "@=value.value"
+
+CountryFieldValue:
+    type: object
+    config:
+        interfaces: [FieldValue]
+        fields:
+            value:
+                type: "String"
+                description: "String representation of the value"
+                resolve: "@=value.value"
+
+DateFieldValue:
+    type: object
+    config:
+        interfaces: [FieldValue]
+        fields:
+            value:
+                type: "String"
+                description: "String representation of the value"
+                resolve: "@=value.value"
+
+DateAndTimeFieldValue:
+    type: object
+    config:
+        interfaces: [FieldValue]
+        fields:
+            value:
+                type: "String"
+                description: "String representation of the value"
+                resolve: "@=value.value"
+
+EmailAddressFieldValue:
+    type: object
+    config:
+        interfaces: [FieldValue]
+        fields:
+            value:
+                type: "String"
+                description: "String representation of the value"
+                resolve: "@=value.value"
+
+FloatFieldValue:
+    type: object
+    config:
+        interfaces: [FieldValue]
+        fields:
+            value:
+                type: "String"
+                description: "String representation of the value"
+                resolve: "@=value.value"
+
+ISBNFieldValue:
+    type: object
+    config:
+        interfaces: [FieldValue]
+        fields:
+            value:
+                type: "String"
+                description: "String representation of the value"
+                resolve: "@=value.value"
+
+IntegerFieldValue:
+    type: object
+    config:
+        interfaces: [FieldValue]
+        fields:
+            value:
+                type: "String"
+                description: "String representation of the value"
+                resolve: "@=value.value"
+
+KeywordFieldValue:
+    type: object
+    config:
+        interfaces: [FieldValue]
+        fields:
+            value:
+                type: "String"
+                description: "String representation of the value"
+                resolve: "@=value.value"
+
+MapLocationFieldValue:
+    type: object
+    config:
+        interfaces: [FieldValue]
+        fields:
+            value:
+                type: "String"
+                description: "String representation of the value"
+                resolve: "@=value.value"
+
+MediaFieldValue:
+    type: object
+    config:
+        interfaces: [FieldValue]
+        fields:
+            value:
+                type: "String"
+                description: "String representation of the value"
+                resolve: "@=value.value"
+
+PriceFieldValue:
+    type: object
+    config:
+        interfaces: [FieldValue]
+        fields:
+            value:
+                type: "String"
+                description: "String representation of the value"
+                resolve: "@=value.value"
+
+RatingFieldValue:
+    type: object
+    config:
+        interfaces: [FieldValue]
+        fields:
+            value:
+                type: "String"
+                description: "String representation of the value"
+                resolve: "@=value.value"
+
+RelationFieldValue:
+    type: object
+    config:
+        interfaces: [FieldValue]
+        fields:
+            value:
+                type: "String"
+                description: "String representation of the value"
+                resolve: "@=value.value"
+
+RelationListFieldValue:
+    type: object
+    config:
+        interfaces: [FieldValue]
+        fields:
+            value:
+                type: "String"
+                description: "String representation of the value"
+                resolve: "@=value.value"
+
+RichTextFieldValue:
+    type: object
+    config:
+        interfaces: [FieldValue]
+        fields:
+            value:
+                type: "String"
+                description: "String representation of the value"
+                resolve: "@=value.value"
+
+SelectionFieldValue:
+    type: object
+    config:
+        interfaces: [FieldValue]
+        fields:
+            value:
+                type: "String"
+                description: "String representation of the value"
+                resolve: "@=value.value"
+
+TextBlockFieldValue:
+    type: object
+    config:
+        interfaces: [FieldValue]
+        fields:
+            value:
+                type: "String"
+                description: "String representation of the value"
+                resolve: "@=value.value"

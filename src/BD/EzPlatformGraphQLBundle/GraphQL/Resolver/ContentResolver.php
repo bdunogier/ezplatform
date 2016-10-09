@@ -168,6 +168,7 @@ class ContentResolver
         $fieldDefinition = $contentType->getFieldDefinition($field->fieldDefIdentifier);
 
         $typesMap = [
+            'ezauthor' => 'AuthorFieldValue',
             'ezstring' => 'TextLineFieldValue',
             'ezimage' => 'ImageFieldValue'
         ];
