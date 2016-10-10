@@ -79,6 +79,15 @@ services:
             - { name: overblog_graphql.resolver, alias: "RichTextXmlToHtml5", method: "xmlToHtml5" }
             - { name: overblog_graphql.resolver, alias: "RichTextXmlToHtml5Edit", method: "xmlToHtml5Edit" }
 
+    bd_ezplatform_graphql.graph.resolver.field_value.image:
+        class: BD\EzPlatformGraphQLBundle\GraphQL\Resolver\ImageFieldResolver
+        arguments:
+            - "@ezpublish.fieldType.ezimage.variation_service"
+            - "@ezpublish.api.service.content"
+            - "$image_variations$"
+        tags:
+            - { name: overblog_graphql.resolver, alias: "ImageVariation", method: "resolveImageVariation" }
+
     bd_ezplatform_graphql.graph.mutation.section:
         class: BD\EzPlatformGraphQLBundle\GraphQL\Mutation\SectionMutation
         arguments:
